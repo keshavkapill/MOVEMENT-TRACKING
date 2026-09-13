@@ -1,556 +1,613 @@
-<div align="center">
+# ✋ Movement Tracking Using OpenCV
 
-✋ Hand Tracking Using OpenCV
-
-Real-Time Computer Vision • MediaPipe • Webcam Tracking
-
-<p>
-  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white"/>
-  <img src="https://img.shields.io/badge/MediaPipe-Hand%20Tracking-FF6F00?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Real--Time-Webcam%20Processing-00A98F?style=for-the-badge"/>
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
+  <img src="https://img.shields.io/badge/MediaPipe-Hand%20Tracking-orange?style=for-the-badge" alt="MediaPipe">
+  <img src="https://img.shields.io/badge/Real--Time-Tracking-purple?style=for-the-badge" alt="Real-Time Tracking">
+  <img src="https://img.shields.io/badge/License-GPL--3.0-lightgrey?style=for-the-badge" alt="License">
 </p>
 
-A real-time hand-tracking application that uses a webcam, OpenCV, and MediaPipe to detect hands, visualize hand landmarks, display landmark coordinates, and monitor processing performance.
-
-</div>
-
-🎥 Project Demo
-
-The project includes a demonstration of the real-time hand-tracking application:
-
-https://github.com/keshavkapill/Hand-Tracking-Using-Opencv/assets/101493756/e0d7fae9-4a16-4639-b5fe-04d5c7f6ce38
-
-📌 About the Project
-
-Hand Tracking Using OpenCV is a Python-based computer vision project that performs real-time hand detection and landmark tracking through a webcam.
-
-The application continuously captures frames from the default camera, processes those frames using OpenCV, and passes the visual information to MediaPipe Hands for hand landmark detection.
-
-For each detected hand, the application visualizes the detected landmarks on the live camera feed. It also accesses the landmark coordinates and highlights landmark index 0 with a filled circle.
-
-In addition, the application calculates and displays the Frames Per Second (FPS), providing a simple indication of how efficiently the application is processing the live video stream.
-
-The project demonstrates the complete flow from:
-
-Camera Input
-     ↓
-Frame Processing
-     ↓
-Hand Detection
-     ↓
-Landmark Detection
-     ↓
-Coordinate Extraction
-     ↓
-Visualization
-     ↓
-FPS Measurement
-
-🎯 Project Objectives
-
-The main objectives of this project are:
-
-✋ Detect hands from a live webcam stream
-
-📍 Track the landmarks associated with detected hands
-
-🧭 Access and print landmark coordinates
-
-🟢 Highlight landmark index 0
-
-🎥 Process video frames continuously in real time
-
-⚡ Measure and display FPS
-
-🧠 Demonstrate practical computer vision concepts using Python
-
-🧩 Core Elements of the Project
-
-1. 🎥 Webcam Input
-
-The webcam acts as the primary input source.
-
-The application continuously captures frames from the computer's default camera and processes them one by one.
-
-Webcam
-  ↓
-Live Video Frames
-  ↓
-OpenCV Processing
-
-2. 👁️ OpenCV
-
-OpenCV is used as the computer vision layer of the project.
-
-It provides the functionality required to:
-
-Access the webcam
-
-Read video frames
-
-Process frames
-
-Draw graphical elements
-
-Display the processed video stream
-
-Support real-time FPS visualization
-
-OpenCV therefore acts as the bridge between the physical camera and the visual output shown to the user.
-
-3. ✋ MediaPipe Hands
-
-MediaPipe Hands performs the hand landmark detection portion of the application.
-
-The visual frame is processed to identify a hand and determine the positions of its landmarks.
-
-The resulting landmark data can then be used for:
-
-Visualization
-
-Coordinate extraction
-
-Gesture analysis
-
-Interaction systems
-
-Future gesture-recognition functionality
-
-4. 📍 Hand Landmarks
-
-The project works with the landmark information returned by MediaPipe.
-
-The landmarks provide structured coordinate data representing important points on a detected hand.
-
-Conceptually:
-
-                    Hand
-                     │
-       ┌─────────────┴─────────────┐
-       │                           │
-  Landmark Data              Hand Connections
-       │                           │
-       └─────────────┬─────────────┘
-                     │
-                     ▼
-              Visual Output
-
-The project specifically highlights landmark 0 using a filled circle.
-
-5. 📊 Landmark Coordinates
-
-For every detected hand, the program accesses the coordinates associated with the detected landmarks.
-
-These coordinates are printed by the application and form the numerical representation behind the visual tracking system.
-
-The basic concept is:
-
-Real Hand
-   ↓
-Camera Image
-   ↓
-MediaPipe Detection
-   ↓
-Landmark Coordinates
-   ↓
-Computer-readable Hand Representation
-
-6. ⚡ FPS Monitoring
-
-The application calculates the frame rate and displays it on the live video.
-
-FPS represents the number of frames processed per second.
-
-Higher FPS → smoother real-time tracking
-Lower FPS  → slower visual response
-
-This gives a simple performance metric while the application is running.
-
-🏗️ System Architecture
-
-┌──────────────────────────────┐
-│          USER HAND           │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│         WEBCAM INPUT         │
-│      Continuous Video        │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│           OpenCV             │
-│ Frame Capture & Processing   │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│       MediaPipe Hands        │
-│     Hand Landmark Detection  │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│     Landmark Coordinates     │
-│       & Hand Structure       │
-└──────────────┬───────────────┘
-               │
-          ┌────┴────┐
-          ▼         ▼
-┌──────────────┐ ┌──────────────┐
-│ Draw/Highlight│ │ Print/Process│
-│  Landmarks    │ │ Coordinates  │
-└──────┬───────┘ └──────┬───────┘
-       │                │
-       └───────┬────────┘
-               ▼
-┌──────────────────────────────┐
-│       FPS Calculation        │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│      LIVE VIDEO OUTPUT       │
-└──────────────────────────────┘
-
-🔄 Complete Project Workflow
-
-START
+<h3 align="center">
+  Real-Time Hand Tracking and Movement Analysis Using Computer Vision
+</h3>
+
+<p align="center">
+  A Python-based computer vision project that uses OpenCV and MediaPipe to detect hands, track hand landmarks, extract coordinates, and visualize movement through a live webcam feed.
+</p>
+
+---
+
+## 📌 About the Project
+
+**Movement Tracking** is a real-time computer vision application designed to detect and track human hand movements using a webcam.
+
+The application captures video frames from the camera, processes them using OpenCV, and uses MediaPipe Hands to identify hand landmarks.
+
+The detected landmarks are displayed directly on the live video stream. The application also provides landmark coordinate information and calculates the Frames Per Second (FPS) to monitor real-time processing performance.
+
+This project demonstrates how computer vision can convert ordinary webcam footage into structured information that can be used for movement analysis and human-computer interaction.
+
+---
+
+## 🎯 Project Objectives
+
+The primary objectives of this project are:
+
+- ✋ Detect hands using a webcam.
+- 📍 Track hand landmarks in real time.
+- 🧭 Extract landmark coordinate information.
+- 🟢 Highlight a selected hand landmark.
+- 🎥 Process video frames continuously.
+- ⚡ Display real-time FPS.
+- 🧠 Demonstrate practical computer vision concepts.
+- 🖥️ Build a foundation for gesture-based applications.
+
+---
+
+## 🚀 Features
+
+| Feature | Description |
+|---|---|
+| 🎥 Webcam Input | Captures live video from the computer's camera. |
+| ✋ Hand Detection | Identifies hands present in the video frame. |
+| 📍 Landmark Tracking | Detects and tracks important points on the hand. |
+| 🧭 Coordinate Extraction | Accesses the coordinates of detected landmarks. |
+| 🟢 Landmark Highlighting | Visually emphasizes a selected landmark. |
+| ⚡ FPS Monitoring | Displays the current frame-processing rate. |
+| 🔄 Real-Time Processing | Continuously processes incoming video frames. |
+| 🖥️ Visual Feedback | Displays the processed camera feed with tracking information. |
+
+---
+
+## 🧠 Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| 🐍 Python | Main programming language. |
+| 👁️ OpenCV | Webcam access, frame processing, drawing, and video display. |
+| ✋ MediaPipe Hands | Hand detection and hand-landmark tracking. |
+| 📦 pip | Python package installation and dependency management. |
+
+---
+
+## 🏗️ System Architecture
+
+```text
+                 ┌───────────────────────┐
+                 │      USER HAND        │
+                 └───────────┬───────────┘
+                             │
+                             ▼
+                 ┌───────────────────────┐
+                 │     WEBCAM INPUT      │
+                 │   Live Video Frames   │
+                 └───────────┬───────────┘
+                             │
+                             ▼
+                 ┌───────────────────────┐
+                 │        OpenCV         │
+                 │ Frame Capture and     │
+                 │ Image Processing      │
+                 └───────────┬───────────┘
+                             │
+                             ▼
+                 ┌───────────────────────┐
+                 │    MediaPipe Hands    │
+                 │ Hand Landmark         │
+                 │ Detection             │
+                 └───────────┬───────────┘
+                             │
+                             ▼
+                 ┌───────────────────────┐
+                 │   LANDMARK DATA       │
+                 │ Coordinates and       │
+                 │ Hand Structure        │
+                 └───────────┬───────────┘
+                             │
+                  ┌──────────┴──────────┐
+                  ▼                     ▼
+       ┌───────────────────┐  ┌───────────────────┐
+       │ Landmark          │  │ Coordinate        │
+       │ Visualization     │  │ Extraction        │
+       └─────────┬─────────┘  └─────────┬─────────┘
+                 │                      │
+                 └──────────┬───────────┘
+                            ▼
+                 ┌───────────────────────┐
+                 │    FPS CALCULATION    │
+                 └───────────┬───────────┘
+                             │
+                             ▼
+                 ┌───────────────────────┐
+                 │    LIVE VIDEO OUTPUT  │
+                 │ Hand Tracking + FPS   │
+                 └───────────────────────┘
+```
+
+---
+
+## 🔄 Project Workflow
+
+The application follows a continuous frame-processing pipeline:
+
+```text
+Start
   │
   ▼
 Initialize Webcam
   │
   ▼
-Capture Frame
+Capture Video Frame
   │
   ▼
-Process Frame with OpenCV
+Process Frame Using OpenCV
   │
   ▼
-Detect Hands with MediaPipe
+Detect Hand Landmarks Using MediaPipe
   │
   ▼
 Are Hands Detected?
   │
-  ├── No ──────────────► Continue Reading Frames
+  ├── No ──► Continue Capturing Frames
   │
   └── Yes
-       │
-       ▼
-   Extract Landmarks
-       │
-       ▼
-   Read Coordinates
-       │
-       ▼
-   Draw Landmarks
-       │
-       ▼
- Highlight Landmark 0
-       │
-       ▼
- Calculate FPS
-       │
-       ▼
- Display Live Feed
-       │
-       ▼
- Repeat
+        │
+        ▼
+   Extract Landmark Data
+        │
+        ▼
+   Access Coordinates
+        │
+        ▼
+   Draw Hand Landmarks
+        │
+        ▼
+   Highlight Selected Landmark
+        │
+        ▼
+   Calculate FPS
+        │
+        ▼
+   Display Live Video
+        │
+        ▼
+   Repeat
+```
 
-🧠 Hand Tracking Logic
+---
 
-The project can be understood through four major stages:
+## 🔍 How the Project Works
 
-Stage 1 — Capture
+### 1. Webcam Input
 
-OpenCV obtains the live image from the webcam.
+The webcam acts as the primary input device.
 
-Stage 2 — Detect
+OpenCV continuously captures frames from the computer's camera. Each frame represents a single image from the live video stream.
 
-MediaPipe processes the frame and identifies available hand landmarks.
+```text
+Webcam
+   ↓
+Live Video Frames
+   ↓
+OpenCV
+```
 
-Stage 3 — Visualize
+---
 
-The detected landmarks are drawn over the original frame and landmark 0 is highlighted.
+### 2. Frame Processing Using OpenCV
 
-Stage 4 — Measure
+OpenCV provides the computer vision functionality required to:
 
-The application calculates FPS to monitor real-time processing performance.
+- Access the webcam.
+- Read video frames.
+- Process image data.
+- Convert frames into the required format.
+- Draw landmarks and graphical elements.
+- Display the processed video stream.
 
-🗂️ Project Structure
+OpenCV acts as the connection between the physical camera and the computer vision pipeline.
 
-The original project instructions reference the following core files:
+---
 
-Hand-Tracking-Using-Opencv/
+### 3. Hand Landmark Detection Using MediaPipe
+
+MediaPipe Hands processes the video frames to identify hand landmarks.
+
+A detected hand is represented using a structured set of landmark points. These points provide information about the positions of important parts of the hand, including the wrist and finger joints.
+
+The detected landmark data can be used for:
+
+- Hand visualization.
+- Coordinate extraction.
+- Finger tracking.
+- Gesture recognition.
+- Human-computer interaction.
+
+---
+
+### 4. Landmark Visualization
+
+Once the hand landmarks are detected, the application draws them over the original video frame.
+
+This allows the user to observe how the detected landmarks follow hand movement in real time.
+
+The project also highlights a selected landmark using a filled circle.
+
+---
+
+### 5. Landmark Coordinates
+
+The application accesses the coordinate information returned by MediaPipe.
+
+These coordinates provide a numerical representation of the detected hand.
+
+Conceptually:
+
+```text
+Real Hand
+    ↓
+Camera Image
+    ↓
+MediaPipe Detection
+    ↓
+Hand Landmark Data
+    ↓
+Coordinate Information
+    ↓
+Computer-Readable Hand Representation
+```
+
+The coordinate data can later be used to develop gesture recognition, movement analysis, and interactive control systems.
+
+---
+
+### 6. FPS Monitoring
+
+The application calculates and displays the Frames Per Second, or FPS.
+
+FPS represents the number of video frames processed per second.
+
+```text
+Higher FPS  → Smoother visual tracking
+Lower FPS   → Slower visual response
+```
+
+FPS provides a basic indication of the application's real-time processing performance.
+
+---
+
+## 📁 Project Structure
+
+The repository contains the following core files and folders:
+
+```text
+MOVEMENT-TRACKING/
 │
-├── app.py
-│   └── Main Python application
+├── 📂 Data Sources and Artifacts/
+│   └── Project-related data and supporting artifacts
 │
-├── requirements.txt
+├── 🐍 Hand Tracking from Media .py
+│   └── Hand-tracking implementation using Python
+│
+├── 🐍 app.py
+│   └── Main application entry point
+│
+├── 📄 requirements.txt
 │   └── Python dependency list
 │
-└── README.md
+├── 📄 .gitignore
+│   └── Files excluded from version control
+│
+├── 📄 LICENSE
+│   └── Project licensing information
+│
+└── 📄 README.md
     └── Project documentation
+```
 
-Keep any additional files, folders, media, or configuration files that already exist in your repository. The structure above documents the files explicitly referenced by the supplied project README.
+> **Note:** The repository contains both `app.py` and `Hand Tracking from Media .py`. Use the appropriate script for the implementation you want to execute.
 
-🛠️ Technology Stack
+---
 
-Technology
+## ⚙️ Installation and Setup
 
-Purpose
+### Prerequisites
 
-🐍 Python
+Before running the project, make sure you have:
 
-Main programming language
+- Python 3.x installed.
+- A working webcam.
+- pip installed.
+- A computer capable of running real-time video processing.
+- Required Python libraries.
 
-👁️ OpenCV
+---
 
-Webcam capture, image processing and video display
+### Step 1: Clone the Repository
 
-✋ MediaPipe
+```bash
+git clone https://github.com/keshavkapill/MOVEMENT-TRACKING.git
+```
 
-Hand detection and landmark tracking
+Navigate to the project directory:
 
-📦 pip / requirements.txt
+```bash
+cd MOVEMENT-TRACKING
+```
 
-Dependency installation and environment setup
+---
 
-📦 Installation & Setup
+### Step 2: Create a Virtual Environment
 
-Step 1 — Clone the Repository
+Creating a virtual environment is recommended to keep project dependencies isolated.
 
-git clone https://github.com/keshavkapill/Hand-Tracking-Using-Opencv.git
-cd Hand-Tracking-Using-Opencv
-
-Step 2 — Create a Virtual Environment
-
-A virtual environment is recommended to keep project dependencies isolated.
-
-Using Python venv
-
+```bash
 python -m venv venv
+```
 
-Activate it on Windows:
+Activate the environment on Windows:
 
+```bash
 venv\Scripts\activate
+```
 
-Using Conda
+Activate the environment on macOS or Linux:
 
-conda create -p ./venv python=3.x -y
-conda activate ./venv
+```bash
+source venv/bin/activate
+```
 
-Step 3 — Install Dependencies
+---
 
-Install the dependencies listed in the project:
+### Step 3: Install Dependencies
 
+Install the packages listed in `requirements.txt`:
+
+```bash
 pip install -r requirements.txt
+```
 
-The primary libraries used are:
+The project primarily uses:
 
-OpenCV
-MediaPipe
+- OpenCV
+- MediaPipe
 
-▶️ Running the Project
+---
 
-Start the application using:
+## ▶️ Running the Project
 
+Run the main application:
+
+```bash
 python app.py
+```
 
-The application should initialize the default webcam and begin processing the live video stream.
+If you want to execute the other hand-tracking script, use its actual filename:
 
-🖥️ Expected Output
+```bash
+python "Hand Tracking from Media .py"
+```
 
-When the application is running, the live camera window provides real-time visual feedback.
+> Make sure the selected script contains the intended executable application logic.
 
-The output includes:
+---
 
-✋ Detected Hand
+## 🖥️ Expected Output
 
-The detected hand is tracked through its landmarks.
+When the application is running, it should provide a live camera window containing hand-tracking information.
 
-📍 Landmark Coordinates
+Expected functionality includes:
 
-The application prints the coordinates of the detected landmarks.
+### ✋ Hand Detection
 
-🟢 Landmark 0
+The application identifies hands visible in the camera feed.
 
-The first landmark is visually emphasized with a filled circle.
+### 📍 Landmark Visualization
 
-⚡ FPS
+Detected hand landmarks are drawn over the video frame.
 
-The current frame-processing rate is displayed on the live feed.
+### 🧭 Landmark Coordinates
 
-🧪 Functional Breakdown
+The application accesses coordinate data associated with detected landmarks.
 
-Input
-│
-└── Webcam Video
+### 🟢 Selected Landmark Highlighting
 
-Processing
-│
-├── OpenCV
-│   ├── Capture Frame
-│   ├── Process Frame
-│   └── Display Frame
-│
-└── MediaPipe Hands
-    ├── Detect Hand
-    └── Locate Landmarks
+A selected landmark is emphasized using a visual marker.
 
-Output
-│
-├── Landmark Visualization
-├── Landmark Coordinates
-├── Highlighted Landmark 0
-└── FPS
+### ⚡ FPS Display
 
-🌐 Potential Applications
+The live video output displays the current frame-processing rate.
 
-The tracking foundation created in this project can be extended into several practical applications.
+---
 
-🕹️ Gesture-Controlled Systems
+## 🧪 Functional Breakdown
 
-Detected hand landmarks can be used to recognize gestures and control applications.
+```text
+INPUT
+  └── Webcam Video
 
-🎮 Gaming
+PROCESSING
+  ├── OpenCV
+  │   ├── Capture Frame
+  │   ├── Process Frame
+  │   └── Display Frame
+  │
+  └── MediaPipe Hands
+      ├── Detect Hand
+      └── Locate Landmarks
 
-Hand movements can become input for interactive games.
+OUTPUT
+  ├── Landmark Visualization
+  ├── Landmark Coordinates
+  ├── Highlighted Landmark
+  └── FPS Information
+```
 
-🥽 Virtual / Augmented Reality
+---
 
-Hand tracking can support natural interaction inside immersive environments.
+## 🌐 Potential Applications
 
-♿ Accessibility Interfaces
+The hand-tracking foundation developed in this project can be extended to several practical applications.
 
-Hand gestures can provide alternative interaction mechanisms.
+### 🕹️ Gesture-Controlled Systems
 
-🖥️ Human-Computer Interaction
+Hand landmarks can be used to recognize gestures and control software applications.
 
-The system can act as a foundation for touchless interfaces and gesture-based controls.
+### 🎮 Gaming
 
-🚀 Possible Extensions
+Hand movements can serve as input for interactive games.
 
-The existing hand-tracking pipeline can be expanded into more advanced applications:
+### 🖥️ Human-Computer Interaction
 
-Hand Tracking
-      ↓
-Finger Detection
-      ↓
-Gesture Recognition
-      ↓
-Gesture Classification
-      ↓
-Action Mapping
-      ↓
-Application Control
+The system can support touchless interaction between users and computers.
 
-Possible additions include:
+### 🥽 Virtual and Augmented Reality
 
-☝️ Finger counting
+Hand tracking can provide a foundation for natural interaction in immersive environments.
 
-👍 Gesture recognition
+### ♿ Accessibility Interfaces
 
-🖱️ Virtual mouse
+Gesture-based controls may provide alternative interaction methods for users.
 
-✍️ Air drawing
+### 📊 Movement Analysis
 
-⌨️ Gesture-based virtual keyboard
+Landmark coordinates can be analyzed to study hand movement patterns and trajectories.
 
-🎵 Gesture-controlled media player
+---
 
-🎮 Gesture-based gaming
+## 🚀 Future Development Roadmap
 
-🤖 Gesture-triggered automation
+The current hand-tracking system can be expanded into a more advanced gesture-recognition platform.
 
-⚠️ Troubleshooting
+```text
+Hand Landmark Tracking
+          │
+          ▼
+     Finger Detection
+          │
+          ▼
+   Gesture Recognition
+          │
+          ▼
+  Gesture Classification
+          │
+          ▼
+    Command Generation
+          │
+          ▼
+   Real-World Interaction
+```
 
-Camera Does Not Open
+### Planned Improvements
 
-Check whether:
+- ☝️ Finger-count detection.
+- 👍 Custom gesture recognition.
+- 🖱️ Virtual mouse control.
+- ✍️ Air drawing.
+- ⌨️ Gesture-based keyboard interaction.
+- 🎵 Gesture-controlled media player.
+- 🎮 Gesture-based gaming.
+- 📍 Landmark coordinate recording.
+- 📈 Movement trajectory analysis.
+- 🤖 Gesture-triggered automation.
+- ⚡ Improved tracking performance.
 
-Another application is already using the webcam.
+---
 
-Camera permissions are enabled.
+## ⚠️ Troubleshooting
 
-The intended camera device is selected.
+### Camera Does Not Open
 
-Dependencies Fail to Install
+Check the following:
 
-Verify that:
+- Ensure the webcam is connected.
+- Verify that camera permissions are enabled.
+- Close other applications using the webcam.
+- Check whether the correct camera device is selected.
 
+### Dependencies Fail to Install
+
+Verify your Python installation:
+
+```bash
 python --version
+```
 
-returns a Python version compatible with the dependencies specified by the project's environment.
+Then try installing the dependencies again:
 
-Then retry:
-
+```bash
 pip install -r requirements.txt
+```
 
-Low FPS
+### Low FPS
 
-Real-time performance can be affected by:
+Real-time performance may be affected by:
 
-System CPU performance
+- CPU performance.
+- Camera resolution.
+- Frame-processing workload.
+- Number of detected hands.
+- Background complexity.
+- Other applications running simultaneously.
 
-Camera resolution
+Try reducing the camera resolution or closing unnecessary applications.
 
-Frame-processing workload
+### Hand Landmarks Are Not Detected Properly
 
-Number of detected hands
+Try the following:
 
-Background complexity
+- Improve lighting conditions.
+- Keep your hand within the camera frame.
+- Avoid excessive motion blur.
+- Ensure that the camera lens is clean.
+- Maintain a suitable distance from the camera.
 
-Other applications running on the system
+---
 
-🧠 Concepts Demonstrated
+## 🧠 Concepts Demonstrated
 
-Computer Vision
+This project provides practical exposure to:
 
-Real-time video capture
+### Computer Vision
 
-Image/frame processing
+- Real-time video capture.
+- Image and frame processing.
+- Hand landmark detection.
+- Visual tracking.
+- Computer vision pipelines.
 
-Object landmark detection
+### Python Programming
 
-Visualization
+- Functions.
+- Loops.
+- Conditional statements.
+- Coordinate handling.
+- External library integration.
+- Real-time application development.
 
-Python
+### Media Processing
 
-Webcam processing
+- Frame-by-frame analysis.
+- Live video processing.
+- Visual output generation.
+- FPS calculation.
 
-Loops
+### Human-Computer Interaction
 
-Functions
+- Hand movement tracking.
+- Vision-based interaction.
+- Gesture-based control foundations.
 
-Conditional processing
+---
 
-Coordinate handling
+## 💡 Why This Project Is Useful
 
-Media Processing
+This project demonstrates how a standard webcam can be transformed into an interactive computer vision input device.
 
-Frame-by-frame analysis
+Instead of treating camera footage as ordinary video, the application extracts structured information from the visual scene.
 
-Real-time output
-
-FPS calculation
-
-Human-Computer Interaction
-
-Vision-based interaction
-
-Hand movement tracking
-
-Foundation for gesture-based controls
-
-💡 Why This Project Is Useful
-
-This project demonstrates how a standard webcam can be transformed into an interactive computer-vision input device.
-
-Instead of treating camera footage as simple video, the application extracts structured information from the visual scene:
-
+```text
 Camera Feed
      ↓
 Visual Information
@@ -559,91 +616,54 @@ Hand Detection
      ↓
 Landmark Data
      ↓
+Coordinate Information
+     ↓
 Computer Interaction
+```
 
-That makes the project a useful foundation for moving from basic webcam processing toward gesture recognition and intelligent human-computer interaction.
+This makes the project a useful foundation for learning computer vision and developing more advanced hand-tracking and gesture-based applications.
 
-🔮 Future Development Roadmap
+---
 
-Current
-  │
-  └── Hand Landmark Tracking
-          │
-          ▼
-      Finger Tracking
-          │
-          ▼
-     Gesture Recognition
-          │
-          ▼
-    Gesture Classification
-          │
-          ▼
-    Command Generation
-          │
-          ▼
-  Real-World Interaction
+## 👨‍💻 Developer
 
-Potential future improvements include:
+**Keshav Kapil**
 
-Multi-hand gesture recognition
+Computer Science student interested in:
 
-Custom gesture classification
+- Software Development
+- Data Analytics
+- Cloud Computing
+- Computer Vision
+- Full-Stack Development
 
-Finger-count detection
+---
 
-Smoother tracking
+## 🤝 Connect With Me
 
-Gesture-to-command mapping
+<p align="left">
+  <a href="https://github.com/keshavkapill">
+    <img src="https://img.shields.io/badge/GitHub-Keshav%20Kapil-black?style=for-the-badge&logo=github" alt="GitHub">
+  </a>
+  <a href="https://www.linkedin.com/in/keshavkapil15">
+    <img src="https://img.shields.io/badge/LinkedIn-Keshav%20Kapil-blue?style=for-the-badge&logo=linkedin" alt="LinkedIn">
+  </a>
+</p>
 
-Coordinate recording
+---
 
-Real-time gesture control
+## 📄 License
 
-Integration with AI applications
+This project is distributed under the **GNU General Public License v3.0**.
 
-👨‍💻 Developer
+Refer to the `LICENSE` file for complete licensing details.
 
-<div align="center">
+---
 
-Keshav Kapil
+<p align="center">
+  ✋ Track • Detect • Visualize • Interact
+</p>
 
-Computer Science student interested in Software Development, Data Analytics, Cloud Computing, Computer Vision, and Full-Stack Development.
-
-</div>
-
-🤝 Connect With Me
-
-<div align="center">
-
-<a href="https://github.com/keshavkapill">
-  <img src="https://img.shields.io/badge/GitHub-Keshav%20Kapil-181717?style=for-the-badge&logo=github&logoColor=white"/>
-</a>
-
-<a href="https://www.linkedin.com/in/keshavkapil15/">
-  <img src="https://img.shields.io/badge/LinkedIn-Keshav%20Kapil-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
-
-<br><br>
-
-<a href="https://github.com/keshavkapill">
-  <b>GitHub Profile</b>
-</a>
-&nbsp;&nbsp;•&nbsp;&nbsp;
-<a href="https://www.linkedin.com/in/keshavkapil15/">
-  <b>LinkedIn Profile</b>
-</a>
-
-<br><br>
-
-❤️ Made with Love by Keshav
-
-</div>
-
-<div align="center">
-
-✋ Track • Detect • Visualize • Interact
-
-⭐ Thanks for visiting the project!
-
-</div>
+<p align="center">
+  ⭐ Thanks for visiting the project!
+</p>
